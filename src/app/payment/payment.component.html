@@ -1,1 +1,64 @@
-<p>payment works!</p>
+<div style="height:100vh;">
+    <div class="flex-center flex-column">
+        <mdb-card>
+            <!-- <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+              <a>
+                <div class="mask"></div>
+              </a>
+            </div> -->
+            <div class="card-header bg-muted">
+                <mdb-card-title class="bg-primary">
+                    <h5 class=" h5-responsive text-primary">Enter card details</h5>
+                  </mdb-card-title>
+            </div>
+            <!--Card content-->
+            <mdb-card-body>
+                <form [formGroup]='paymentForm' novalidate class="form" (ngSubmit) = "this.payService.pay(paymentForm.value); addCard(paymentForm.value)">
+                    <div class="md-form">
+                        <input mdbInput formControlName='cardNumber' id="cardNumber" type="number" class="form-control" />
+                        <label for="cardNumber">Card Number</label>
+                        <small class="alert text-danger" *ngIf="paymentForm.get('cardNumber').hasError('required') && paymentForm.get('cardNumber').touched">
+                            *Card number is required.
+                        </small>
+                    </div>
+                    <div class="md-form">
+                        <input mdbInput formControlName='cardHolder' id="cardHolder" type="text" class="form-control" />
+                        <label for="cardHolder">Card Holder</label>
+                        <small class="alert text-danger" *ngIf="paymentForm.get('cardHolder').hasError('required') && paymentForm.get('cardHolder').touched">
+                            *Card holder field is required.
+                        </small>
+                    </div>
+                    <div class="md-form">
+                        <input mdbInput formControlName='expirationDate' (change) = "check()" id="date" type="date" class="form-control" />
+                        <label for="date">Expiration Date</label>
+                        <small class="alert text-danger" *ngIf="paymentForm.get('expirationDate').hasError('required') && paymentForm.get('expirationDate').touched">
+                            *Expiration date is required.
+                        </small>
+                        <small class="alert text-danger" *ngIf="!dateValid && paymentForm.get('expirationDate').touched">
+                            *Expiration date cannot be earlier than today's date.
+                        </small>
+                    </div>
+                    <div class="md-form">
+                        <input mdbInput formControlName='CCV' id="code" type="number" class="form-control" maxlength="3">
+                        <label for="code">Security Code</label>
+                        <small class="alert text-danger" *ngIf="paymentForm.get('CCV').hasError('required') && paymentForm.get('CCV').touched">
+                            *Security code is required.
+                        </small>
+                    </div>
+                    <div class="md-form">
+                        <input mdbInput formControlName='amount' id="amount" type="number" class="form-control" />
+                        <label for="amount">Enter Amount</label>
+                        <small class="alert text-danger" *ngIf="paymentForm.get('amount').hasError('required') && paymentForm.get('amount').touched">
+                            *Amount is required.
+                        </small>
+                    </div>
+                    <button type ="submit" mdbBtn class="btn btn-primary float-right mt-0" style="border-radius: 25px;" [disabled]='paymentForm.invalid || !dateValid'>
+                        Pay <mdb-icon fas icon="arrow-right" class="ml-1"></mdb-icon>
+                    </button>
+                </form>
+              
+            </mdb-card-body>
+          </mdb-card>
+    </div>
+    <div id="snackbar" [class.show] = "this.payService.toast">{{this.payService.toastMsg}}</div>
+</div>

@@ -1,0 +1,9 @@
+mdb-card {
+    width: 40%;
+}
+
+@media (max-width: 990px) {
+    mdb-card {
+        width: 90%;
+    }
+}
