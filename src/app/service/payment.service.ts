@@ -11,7 +11,7 @@ import { catchError, finalize } from 'rxjs/operators';
 export class PaymentService {
 
 
-  baseUrl = "https://reqres.in/api/";
+  baseUrl = "https://reqres.in/api";
   constructor(public http: HttpClient) { }
 
   loader: boolean = false;
