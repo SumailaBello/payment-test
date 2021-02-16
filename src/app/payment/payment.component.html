@@ -52,8 +52,9 @@
                             *Amount is required.
                         </small>
                     </div>
-                    <button type ="submit" mdbBtn class="btn btn-primary float-right mt-0" style="border-radius: 25px;" [disabled]='paymentForm.invalid || !dateValid'>
-                        Pay <mdb-icon fas icon="arrow-right" class="ml-1"></mdb-icon>
+                    <button type ="submit" mdbBtn class="btn btn-primary float-right mt-0 text-center" style="border-radius: 25px; width: 150px;" [disabled]='paymentForm.invalid || !dateValid'>
+                        <span *ngIf = "!this.payService.loader">Pay <mdb-icon fas icon="arrow-right" class="ml-1"></mdb-icon></span>
+                        <div class="loader d-inline-block" *ngIf = "this.payService.loader"></div>
                     </button>
                 </form>
               
